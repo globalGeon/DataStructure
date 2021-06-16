@@ -87,8 +87,21 @@ BinaryTree.prototype._traversePostOrder = function () {
         console.log(current.value);
     }
 }
+BinaryTree.prototype.traverseLevelOrder = function () {
+    var queue = [];
+    
+    if(!this._root) return;
+    queue.push(this._root);
+    while(queue.length) {
+        var current = queue.shift();
+        console.log(current.value);
+        if(current.left) queue.push(current.left);
+        if(current.right) queue.push(current.right);
+    }
+}
 
 var binarytree = new BinaryTree();
+
 var node1 = new Node(1);
 var node2 = new Node(2);
 var node3 = new Node(3);
@@ -96,6 +109,7 @@ var node4 = new Node(4);
 var node5 = new Node(5);
 var node6 = new Node(6);
 var node7 = new Node(7);
+
 binarytree._root = node1;
 node1.left = node2;
 node1.right = node3;
@@ -112,3 +126,5 @@ binarytree._traverseInOrder(); // 4-2-5-1-6-3-7
 
 binarytree.traversePostOrder(); // 4-5-2-6-7-3-1
 binarytree._traversePostOrder(); // 4-5-2-6-7-3-1
+
+binarytree.traverseLevelOrder(); // 1-2-3-4-5-6-7
